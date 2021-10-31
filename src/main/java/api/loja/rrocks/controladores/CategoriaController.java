@@ -54,13 +54,23 @@ public class CategoriaController {
          * */
 
         Categoria categoria = servico.converterParaCategoria(categoriaDTO);
-
         servico.salvar(categoria);
         URI uriBuscaNovoDadoInserido = ServletUriComponentsBuilder
                 .fromCurrentRequestUri()
                 .path("/{id}")
                 .buildAndExpand(categoria.getId()).toUri();
         return ResponseEntity.created(uriBuscaNovoDadoInserido).build();
+
+    }
+
+    //ATUALIZAR UMA CATEGORIA
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+    public ResponseEntity<?> atualizar(@Valid @RequestBody CategoriaDTO categoriaDTO, @PathVariable Long id) {
+        Categoria categoria = servico.converterParaCategoria(categoriaDTO);
+        categoria.setId(id);
+        servico.atualizar(categoria);
+        //https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10
+        return ResponseEntity.noContent().build();
 
     }
 
