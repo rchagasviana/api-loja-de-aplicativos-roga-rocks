@@ -39,7 +39,7 @@ public class CategoriaRepostaDTO implements Serializable {
 
     }
 
-    public static List<CategoriaRepostaDTO> converterParaListaVendaDTO(List<Categoria> listaDeCategoria) {
+    public static List<CategoriaRepostaDTO> converterParaListaCategoriaDTO(List<Categoria> listaDeCategoria) {
         List<CategoriaRepostaDTO> listaCategoriaDTO = listaDeCategoria
                 .stream()
                 .map(categoria -> new ModelMapper().map(categoria, CategoriaRepostaDTO.class))

@@ -18,7 +18,7 @@ public class CategoriaDTO implements Serializable {
     private Long id;
 
     @NotEmpty(message = "Preenchimento obrigatório")
-    @Length(min = 3, max = 100, message = "O nome tem que ter entre 3 e 100 caracteres")
+    @Length(min = 3, max = 100, message = "O nome da Categoria precisa ter entre 3 e 100 caracteres")
     private String nome;
 
     private Instant dataDeCriacao;

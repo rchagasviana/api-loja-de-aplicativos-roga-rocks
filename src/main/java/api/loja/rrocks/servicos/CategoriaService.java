@@ -45,8 +45,6 @@ public class CategoriaService {
        return repositorio.atualizarNome(categoria.getNome(),categoria.getId());
     }
 
-    
-
     /**
      * Este método serve para auxiliar na conversão de uma CategoriaDTO para uma Categoria no momento de
      * salvar,atualizar uma categoria após passar pela validação do CategoriaDTO
