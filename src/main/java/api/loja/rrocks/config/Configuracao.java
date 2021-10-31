@@ -57,7 +57,10 @@ public class Configuracao implements CommandLineRunner {
         Cidade cidade09 = new Cidade(null, "Salvador", estado09);
         Cidade cidade10 = new Cidade(null, "Porto Alegre", estado10);
         Cidade cidade11 = new Cidade(null, "Florianópolis", estado11);
-        cidadeRepository.saveAll(Arrays.asList(cidade01, cidade02, cidade03, cidade04, cidade05, cidade06, cidade07, cidade08, cidade09, cidade10, cidade11));
+        Cidade cidade12 = new Cidade(null, "Imperatriz", estado01);
+        Cidade cidade13 = new Cidade(null, "Caxias", estado01);
+        Cidade cidade14 = new Cidade(null, "Barreirinhas", estado01);
+        cidadeRepository.saveAll(Arrays.asList(cidade01, cidade02, cidade03, cidade04, cidade05, cidade06, cidade07, cidade08, cidade09, cidade10, cidade11, cidade12, cidade13, cidade14));
 
 
         //Populando a tabela Categoria

@@ -32,10 +32,10 @@ public class Estado implements Serializable {
     private String nome;
 
     //RELACIONAMENTOS
-    @Getter
     @JsonIgnore
+    @Getter
     @OneToMany(mappedBy = "estado")
-    List<Cidade> cidades = new ArrayList<>();
+    private List<Cidade> cidades = new ArrayList<>();
 
 
     public Estado(Long id, String nome) {

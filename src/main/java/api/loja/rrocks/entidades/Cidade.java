@@ -1,6 +1,7 @@
 package api.loja.rrocks.entidades;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -29,6 +30,8 @@ public class Cidade implements Serializable {
     private String nome;
 
     //RELACIONAMENTOS
+    @Getter
+    @Setter
     @ManyToOne
     @JoinColumn(name = "id_estado")
     private Estado estado;

@@ -27,8 +27,8 @@ public class EstadoService {
 
     //BUSCAR POR ID
     public Estado buscarPorId(Long id) {
-        Optional<Estado> categoria = repositorio.findById(id);
-        return categoria.orElseThrow(
+        Optional<Estado> estado = repositorio.findById(id);
+        return estado.orElseThrow(
                 () -> new ObjetoNaoEncontradoException("registro de Id igual a " + id + " não encontrado!!")
         );
     }
