@@ -26,7 +26,7 @@ public class Cidade implements Serializable {
 
     @Getter
     @Setter
-    @Column(length = 100, nullable = false)
+    @Column(length = 100)
     private String nome;
 
     //RELACIONAMENTOS

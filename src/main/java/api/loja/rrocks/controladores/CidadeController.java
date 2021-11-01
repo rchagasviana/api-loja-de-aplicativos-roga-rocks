@@ -1,7 +1,8 @@
 package api.loja.rrocks.controladores;
 
 
-import api.loja.rrocks.dto.CidadeDTO;
+import api.loja.rrocks.dto.CidadeAtualizarDTO;
+import api.loja.rrocks.dto.CidadeSalvarDTO;
 import api.loja.rrocks.dto.CidadeRespostaDTO;
 import api.loja.rrocks.entidades.Cidade;
 import api.loja.rrocks.servicos.CidadeService;
@@ -41,7 +42,7 @@ public class CidadeController {
 
     //SALVAR UMA NOVA CIDADE
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<Cidade> salvar(@Valid @RequestBody CidadeDTO cidadeDTO) {
+    public ResponseEntity<Cidade> salvar(@Valid @RequestBody CidadeSalvarDTO cidadeSalvarDTO) {
         /*
          * Conforme a RFC 2616, o código 201 é retornado sempre que um novo valor é inserido, logo
          * a fim de seguir tal padrão todos os métodos utilizados para salvar deverão retornar o código
@@ -53,7 +54,7 @@ public class CidadeController {
          * buildAndExpand() -> captura o id do nodo dado inserido
          * */
 
-        Cidade cidade = servico.fromDTO(cidadeDTO);
+        Cidade cidade = servico.fromDTOSalvar(cidadeSalvarDTO);
 
         servico.salvar(cidade);
         URI uriBuscaNovoDadoInserido = ServletUriComponentsBuilder
@@ -66,9 +67,10 @@ public class CidadeController {
 
     //ATUALIZAR UMA CIDADE
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<?> atualizar(@Valid @RequestBody CidadeDTO cidadeDTO, @PathVariable Long id) {
-        Cidade cidade = servico.converterParaCidade(cidadeDTO);
-        cidade.setId(id);
+    public ResponseEntity<?> atualizar(@Valid @RequestBody CidadeAtualizarDTO cidadeAtualizarDTO, @PathVariable Long id) {
+        cidadeAtualizarDTO.setId(id);
+        Cidade cidade = servico.fromDTOAtualizar(cidadeAtualizarDTO);//servico.converterParaCidade(cidadeAtualizarDTO);
+        //cidade.setId(id);
         servico.atualizar(cidade);
         //https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10
         return ResponseEntity.noContent().build();
