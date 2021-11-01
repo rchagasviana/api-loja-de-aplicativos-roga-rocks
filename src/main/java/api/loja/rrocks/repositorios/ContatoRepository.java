@@ -1,9 +1,9 @@
 package api.loja.rrocks.repositorios;
 
-import api.loja.rrocks.entidades.Usuario;
+import api.loja.rrocks.entidades.Contato;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
+public interface ContatoRepository extends JpaRepository<Contato, Long> {
 }

@@ -37,12 +37,14 @@ public abstract class Usuario implements Serializable {
     private List<Endereco> enderecos = new ArrayList<>();
 
     /*
-    * -Cada ocorrência de Usuário pode ter somente uma ocorrência de Contato.
-    * -A Entidade Contato representa uma entidade fraca, portanto, a sua chave estrangeira também é chave primária.
-    * Isso porque, nesta regra de negócio, não faz sentido existir um registro de Contato sem um Usuário associado
-    *
-    *  */
-    @OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL)
+     * -Cada ocorrência de Usuário pode ter somente uma ocorrência de ContatoRepository.
+     * -A Entidade ContatoRepository representa uma entidade fraca, portanto, a sua chave estrangeira também é chave primária.
+     * Isso porque, nesta regra de negócio, não faz sentido existir um registro de ContatoRepository sem um Usuário associado
+     *
+     *  */
+    @Getter
+    @Setter
+    @OneToOne(cascade = CascadeType.ALL) //neste caso não se usa mappedBy = "usuario"
     @PrimaryKeyJoinColumn
     private Contato contato;
 

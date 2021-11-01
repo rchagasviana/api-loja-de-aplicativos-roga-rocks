@@ -1,15 +1,13 @@
 package api.loja.rrocks.config;
 
 import api.loja.rrocks.entidades.*;
-import api.loja.rrocks.repositorios.CategoriaRepository;
-import api.loja.rrocks.repositorios.CidadeRepository;
-import api.loja.rrocks.repositorios.EstadoRepository;
-import api.loja.rrocks.repositorios.UsuarioRepository;
+import api.loja.rrocks.repositorios.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
+import javax.transaction.Transactional;
 import java.time.Instant;
 import java.util.Arrays;
 
@@ -29,6 +27,12 @@ public class Configuracao implements CommandLineRunner {
 
     @Autowired
     private UsuarioRepository usuarioRepository;
+
+    @Autowired
+    private EnderecoRepository enderecoRepository;
+
+    @Autowired
+    private ContatoRepository contatoRepository;
 
     @Override
     public void run(String... args) throws Exception {
@@ -89,8 +93,35 @@ public class Configuracao implements CommandLineRunner {
         Usuario fabricante09 = new Fabricante(null, "Handy Apps", Instant.parse("2008-07-01T00:00:00Z"), "29.953.218/0001-42");
         Usuario fabricante10 = new Fabricante(null, "Spotify AB", Instant.parse("2008-07-01T00:00:00Z"), "51.621.179/0001-35");
         Usuario fabricante11 = new Fabricante(null, "Adidas Runtastic", Instant.parse("2008-07-01T00:00:00Z"), "53.552.175/0001-78");
-
         usuarioRepository.saveAll(Arrays.asList(fabricante01, fabricante02, fabricante03, fabricante04, fabricante05, fabricante06, fabricante07, fabricante08, fabricante09, fabricante10, fabricante11));
 
+        //POPULANDO ENDEREÇO PARA USUÁRIOS-FABRICANTES
+        Endereco endereco01 = new Endereco(null, "1ª Travessa Quinta dos Machados", "30-B", "Próximo à Universidade X", "Túnel do Sacavém", "65043-243", cidade01, fabricante01);
+        Endereco endereco02 = new Endereco(null, "Rua Marechal Castelo Branco", "SN", "Próximo à Escola A", "Olho D'Água", "65065-090", cidade01, fabricante02);
+        Endereco endereco03 = new Endereco(null, "Rua Vereador Paulo Fortes", "SN", "Próximo ao Batalhão PM-MA", "Recanto das Palmeiras", "64045-780", cidade02, fabricante03);
+        Endereco endereco04 = new Endereco(null, "Rua I", "SN", "Próximo ao Hospital da Cidade", "Parque Dois Irmãos", "60761-305", cidade03, fabricante04);
+        Endereco endereco05 = new Endereco(null, "Rua I", "SN", "Próximo ao Centro Industrial", "Parque Dois Irmãos", "60761-305", cidade03, fabricante05);
+        Endereco endereco06 = new Endereco(null, "Rua I", "SN", "Próximo ao Centro Industrial", "Parque Dois Irmãos", "60761-305", cidade03, fabricante06);
+        Endereco endereco07 = new Endereco(null, "Rua I", "SN", "Próximo ao Centro Industrial", "Parque Dois Irmãos", "60761-305", cidade03, fabricante07);
+        Endereco endereco08 = new Endereco(null, "Rua I", "SN", "Próximo ao Centro Industrial", "Parque Dois Irmãos", "60761-305", cidade03, fabricante08);
+        Endereco endereco09 = new Endereco(null, "Rua I", "SN", "Próximo ao Centro Industrial", "Parque Dois Irmãos", "60761-305", cidade03, fabricante09);
+        Endereco endereco10 = new Endereco(null, "Rua I", "SN", "Próximo ao Centro Industrial", "Parque Dois Irmãos", "60761-305", cidade03, fabricante10);
+        Endereco endereco11 = new Endereco(null, "Rua I", "SN", "Próximo ao Centro Industrial", "Parque Dois Irmãos", "60761-305", cidade03, fabricante11);
+        Endereco endereco12 = new Endereco(null, "Rua I", "SN", "Próximo ao Centro Industrial", "Parque Dois Irmãos", "60761-305", cidade03, fabricante01);
+        enderecoRepository.saveAll(Arrays.asList(endereco01, endereco02, endereco03, endereco04, endereco05, endereco06, endereco07, endereco08, endereco09, endereco10, endereco11, endereco12));
+
+        //POPULANDO CONTATO PARA USUÁRIOS-FABRICANTES
+        Contato contato01 = new Contato(null, "SeleepCycleAB@hotmail.com", "(98) 38247-0672", fabricante01);
+        Contato contato02 = new Contato(null, "PerigeeAB@hotmail.com", "(36) 20798-3058", fabricante02);
+        Contato contato03 = new Contato(null, "Shoppe@hotmail.com", "(82) 34688-6182", fabricante03);
+        Contato contato04 = new Contato(null, "MosaicoNegóciosdeInternetS.A@hotmail.com", "(74) 53726-5164", fabricante04);
+        Contato contato05 = new Contato(null, "Skype@hotmail.com", "(49) 72715-8818", fabricante05);
+        Contato contato06 = new Contato(null, "GranCursosOnlline@hotmail.com", "(73) 43947-4354", fabricante06);
+        Contato contato07 = new Contato(null, "C6Bank@hotmail.com", "(71) 37943-4490", fabricante07);
+        Contato contato08 = new Contato(null, "Waze@hotmail.com", "(69) 89174-6615", fabricante08);
+        Contato contato09 = new Contato(null, "HandyApps@hotmail.com", "(89) 60144-5979", fabricante09);
+        Contato contato10 = new Contato(null, "SpotifyAB@hotmail.com", "(21) 83039-1299", fabricante10);
+        Contato contato11 = new Contato(null, "AdidasRuntastic@hotmail.com", "(49) 25733-9335", fabricante11);
+        contatoRepository.saveAll(Arrays.asList(contato01, contato02, contato03, contato04, contato05, contato06, contato07, contato08, contato09, contato10, contato11));
     }
 }

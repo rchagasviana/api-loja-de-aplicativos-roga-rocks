@@ -46,7 +46,7 @@ public class Endereco implements Serializable {
 
     @Getter
     @Setter
-    @Column(length = 8)
+    @Column(length = 20)
     private String cep;
 
     //RELACIONAMENTOS
@@ -55,7 +55,6 @@ public class Endereco implements Serializable {
     @ManyToOne
     @JoinColumn(name = "cidade_id", nullable = false)
     private Cidade cidade;
-
 
     @JsonIgnore
     @Getter

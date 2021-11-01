@@ -37,9 +37,6 @@ public class Categoria implements Serializable {
     private Instant dataDeCriacao;
 
     //RELACIONAMENTOS
-    @ManyToOne
-    @JoinColumn(name = "fabricante_id")
-    private Fabricante fabricante;
 
     @Getter
     @OneToMany(mappedBy = "categoria")
