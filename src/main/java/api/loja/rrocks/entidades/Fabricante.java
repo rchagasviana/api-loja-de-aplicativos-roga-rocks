@@ -26,13 +26,19 @@ public class Fabricante extends Usuario {
     @Column(nullable = false)
     private Instant dataFundacao;
 
+    @Getter
+    @Setter
+    @Column(length = 30, nullable = false)
+    private String cnpj;
+
     //RELACIONAMENTOS
     @OneToMany(mappedBy = "fabricante")
     private List<Aplicativo> aplicativos = new ArrayList<>();
 
 
-    public Fabricante(Long id, String nome, Instant dataFundacao) {
+    public Fabricante(Long id, String nome, Instant dataFundacao, String cnpj) {
         super(id, nome);
         this.dataFundacao = dataFundacao;
+        this.cnpj = cnpj;
     }
 }
