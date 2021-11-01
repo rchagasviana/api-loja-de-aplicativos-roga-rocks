@@ -1,8 +1,53 @@
 package api.loja.rrocks.entidades;
 
-public abstract class Usuario {
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+@NoArgsConstructor
+@EqualsAndHashCode
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Entity
+public abstract class Usuario implements Serializable {
+    private static final long serialVersionUID = 2995162596171271014L;
+
+    //ATRIBUTOS BÁSICOS
+    @Getter
+    @Setter
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+    @Getter
+    @Setter
+    @Column(length = 50, nullable = false)
     private String nome;
-    private String natureza; //transformar em enum
+
+    //RELACIONAMENTOS
+    @Getter
+    @OneToMany(mappedBy = "usuario")
+    private List<Endereco> enderecos = new ArrayList<>();
+
+    /*
+    * -Cada ocorrência de Usuário pode ter somente uma ocorrência de Contato.
+    * -A Entidade Contato representa uma entidade fraca, portanto, a sua chave estrangeira também é chave primária.
+    * Isso porque, nesta regra de negócio, não faz sentido existir um registro de Contato sem um Usuário associado
+    *
+    *  */
+    @OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL)
+    @PrimaryKeyJoinColumn
+    private Contato contato;
+
+    public Usuario(Long id, String nome) {
+        this.id = id;
+        this.nome = nome;
+    }
 }

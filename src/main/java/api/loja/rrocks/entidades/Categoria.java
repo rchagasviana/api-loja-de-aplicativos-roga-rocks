@@ -8,6 +8,8 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @NoArgsConstructor
@@ -18,18 +20,30 @@ public class Categoria implements Serializable {
     private static final long serialVersionUID = -1203976754595126432L;
 
     //ATRIBUTOS BÁSICOS
-    @Getter @Setter
+    @Getter
+    @Setter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Getter @Setter
+    @Getter
+    @Setter
     @Column(length = 100, nullable = false)
     private String nome;
 
-    @Getter @Setter
+    @Getter
+    @Setter
     @Column(nullable = false)
     private Instant dataDeCriacao;
+
+    //RELACIONAMENTOS
+    @ManyToOne
+    @JoinColumn(name = "fabricante_id")
+    private Fabricante fabricante;
+
+    @Getter
+    @OneToMany(mappedBy = "categoria")
+    private List<Aplicativo> aplicativos = new ArrayList<>();
 
 
     public Categoria(Long id, String nome, Instant dataDeCriacao) {
