@@ -1,6 +1,7 @@
 package api.loja.rrocks.config;
 
 import api.loja.rrocks.entidades.*;
+import api.loja.rrocks.entidades.enums.Sexo;
 import api.loja.rrocks.repositorios.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -18,19 +19,14 @@ public class Configuracao implements CommandLineRunner {
 
     @Autowired
     private CategoriaRepository categoriaRepository;
-
     @Autowired
     private EstadoRepository estadoRepository;
-
     @Autowired
     private CidadeRepository cidadeRepository;
-
     @Autowired
     private UsuarioRepository usuarioRepository;
-
     @Autowired
     private EnderecoRepository enderecoRepository;
-
     @Autowired
     private ContatoRepository contatoRepository;
 
@@ -123,5 +119,53 @@ public class Configuracao implements CommandLineRunner {
         Contato contato10 = new Contato(null, "SpotifyAB@hotmail.com", "(21) 83039-1299", fabricante10);
         Contato contato11 = new Contato(null, "AdidasRuntastic@hotmail.com", "(49) 25733-9335", fabricante11);
         contatoRepository.saveAll(Arrays.asList(contato01, contato02, contato03, contato04, contato05, contato06, contato07, contato08, contato09, contato10, contato11));
+
+
+        //POPULANDO USUÁRIO CONSUMIDOR
+        Usuario consumidor01 = new Consumidor(null, "Gael Cláudio Murilo das Neves", Instant.parse("1980-07-01T00:00:00Z"), Sexo.MASCULINO, "Programador");
+        Usuario consumidor02 = new Consumidor(null, "Ryan Bruno Raul Silveira", Instant.parse("1985-07-01T00:00:00Z"), Sexo.MASCULINO, "Engenheiro Civil");
+        Usuario consumidor03 = new Consumidor(null, "Stella Cláudia Lopes", Instant.parse("1950-07-01T00:00:00Z"), Sexo.FEMININO, "Educador Físico");
+        Usuario consumidor04 = new Consumidor(null, "Rafael Luan Erick Martins", Instant.parse("1988-07-01T00:00:00Z"), Sexo.MASCULINO, "Médico");
+        Usuario consumidor05 = new Consumidor(null, "Juliana Evelyn Figueiredo", Instant.parse("1990-07-01T00:00:00Z"), Sexo.FEMININO, "Advogado");
+        Usuario consumidor06 = new Consumidor(null, "Vanessa Sophia Alves", Instant.parse("1996-07-01T00:00:00Z"), Sexo.FEMININO, "Policial");
+        Usuario consumidor07 = new Consumidor(null, "Miguel Yago Vicente da Cruz", Instant.parse("2000-07-01T00:00:00Z"), Sexo.MASCULINO, "Vendedor");
+        Usuario consumidor08 = new Consumidor(null, "Martin Marcelo Giovanni Martins", Instant.parse("2008-07-01T00:00:00Z"), Sexo.MASCULINO, "Auxiliar de Serviços Gerais");
+        Usuario consumidor09 = new Consumidor(null, "Manuela Cecília Baptista", Instant.parse("2005-07-01T00:00:00Z"), Sexo.FEMININO, "Professor");
+        Usuario consumidor10 = new Consumidor(null, "Márcia Alessandra da Costa", Instant.parse("1960-07-01T00:00:00Z"), Sexo.FEMININO, "Analista Financeiro");
+        Usuario consumidor11 = new Consumidor(null, "César Ruan Gomes", Instant.parse("1960-07-01T00:00:00Z"), Sexo.MASCULINO, "Engenheiro de Software");
+        usuarioRepository.saveAll(Arrays.asList(consumidor01, consumidor02, consumidor03, consumidor04, consumidor05, consumidor06, consumidor07, consumidor08, consumidor09, consumidor10, consumidor11));
+
+        //POPULANDO ENDEREÇO PARA USUÁRIOS-CONSUMIDORES
+        Endereco endereco13 = new Endereco(null, "Via de Acesso Oito", "30-B", "Próximo à Universidade X", "Jardim Carvalho", "91430-265", cidade01, consumidor01);
+        Endereco endereco14 = new Endereco(null, "Beco Nove", "SN", "Próximo à Escola A", "Protásio Alves", "91450-600", cidade01, consumidor02);
+        Endereco endereco15 = new Endereco(null, "Acesso Cinco B", "SN", "Próximo ao Batalhão PM-MA", "Sarandi", "91120-024", cidade02, consumidor03);
+        Endereco endereco16 = new Endereco(null, "Rua Nova Petrópolis", "SN", "Próximo ao Hospital da Cidade", "Cascata", "91710-500", cidade03, consumidor04);
+        Endereco endereco17 = new Endereco(null, "Rua Miraguaí", "SN", "Próximo ao Centro Industrial", "Lomba do Pinheiro", "91550-826", cidade03, consumidor05);
+        Endereco endereco18 = new Endereco(null, "Rua João Cláudio Ribeiro da Roza", "SN", "Próximo ao Centro Industrial", "Lami", "91787-667", cidade03, consumidor06);
+        Endereco endereco19 = new Endereco(null, "Travessa Dois", "SN", "Próximo ao Centro Industrial", "Novo Angelim", "65060-474", cidade03, consumidor07);
+        Endereco endereco20 = new Endereco(null, "Travessa Nove", "SN", "Próximo ao Centro Industrial", "Chácara Itapiracó", "65054-890", cidade03, consumidor08);
+        Endereco endereco21 = new Endereco(null, "Fonte das Pedras", "SN", "Próximo ao Centro Industrial", "Centro", "65015-400", cidade03, consumidor09);
+        Endereco endereco22 = new Endereco(null, "Rua Quarenta e Nove", "SN", "Próximo ao Centro Industrial", "Vinhais", "65071-260", cidade03, consumidor10);
+        Endereco endereco23 = new Endereco(null, "Rua Frei Sampaio", "SN", "Próximo ao Centro Industrial", "Lira", "65025-430", cidade03, consumidor11);
+        Endereco endereco24 = new Endereco(null, "Rua dos Timbós", "SN", "Próximo ao Centro Industrial", "Jardim Renascença", "65075-410", cidade03, consumidor02);
+        enderecoRepository.saveAll(Arrays.asList(endereco13, endereco14, endereco15, endereco16, endereco17, endereco18, endereco19, endereco20, endereco21, endereco22, endereco23, endereco24));
+
+        //POPULANDO CONTATOS PARA USUÁRIOS-CONSUMIDORES
+        Contato contato12 = new Contato(null, "GaelClaudio@hotmail.com", "(52) 65857-4467", consumidor01);
+        Contato contato13 = new Contato(null, "RyanBruno@hotmail.com", "(18) 46280-1404", consumidor02);
+        Contato contato14 = new Contato(null, "StellaClaudia@hotmail.com", "(69) 79034-6774", consumidor03);
+        Contato contato15 = new Contato(null, "RafaelLuan@hotmail.com", "(16) 46828-9125", consumidor04);
+        Contato contato16 = new Contato(null, "JulianaEvelyn@hotmail.com", "(24) 65281-0826", consumidor05);
+        Contato contato17 = new Contato(null, "VanessaSophia@hotmail.com", "(60) 45656-1182", consumidor06);
+        Contato contato18 = new Contato(null, "MiguelYago@hotmail.com", "(72) 30890-8909", consumidor07);
+        Contato contato19 = new Contato(null, "MartinMarcelo@hotmail.com", "(38) 65081-7306", consumidor08);
+        Contato contato20 = new Contato(null, "ManuelaCecilia@hotmail.com", "(17) 84004-1902", consumidor09);
+        Contato contato21 = new Contato(null, "MarciaAlessandra@hotmail.com", "(86) 17983-2760", consumidor10);
+        Contato contato22 = new Contato(null, "CesarRuan@hotmail.com", "(69) 32897-5096", consumidor11);
+        contatoRepository.saveAll(Arrays.asList(contato12, contato13, contato14, contato15, contato16, contato17, contato18, contato19, contato20, contato21, contato22));
+
+
+
+
     }
 }
