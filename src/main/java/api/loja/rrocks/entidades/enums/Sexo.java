@@ -23,6 +23,7 @@ public enum Sexo {
         if (codigo == null) {
             return null;
         }
+        //Percorre todos os valores do Enum
         for (Sexo valor : Sexo.values()) {
             if (valor.getCodigo() == codigo) {
                 return valor; //recebe o código e retorna o objeto do tipo do enum

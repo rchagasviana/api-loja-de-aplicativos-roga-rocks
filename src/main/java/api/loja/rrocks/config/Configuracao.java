@@ -1,7 +1,9 @@
 package api.loja.rrocks.config;
 
 import api.loja.rrocks.entidades.*;
+import api.loja.rrocks.entidades.enums.ClassificacaoAplicativo;
 import api.loja.rrocks.entidades.enums.Sexo;
+import api.loja.rrocks.entidades.enums.StatusAplicativo;
 import api.loja.rrocks.repositorios.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -29,6 +31,8 @@ public class Configuracao implements CommandLineRunner {
     private EnderecoRepository enderecoRepository;
     @Autowired
     private ContatoRepository contatoRepository;
+    @Autowired
+    private AplicativoRepository aplicativoRepository;
 
     @Override
     public void run(String... args) throws Exception {
@@ -165,6 +169,40 @@ public class Configuracao implements CommandLineRunner {
         contatoRepository.saveAll(Arrays.asList(contato12, contato13, contato14, contato15, contato16, contato17, contato18, contato19, contato20, contato21, contato22));
 
 
+        //POPULANDO APLICATIVO
+        Aplicativo aplicativo01 = new Aplicativo(
+                null,
+                "Sleep Cyce: Gravador de sono",
+                12.25,
+                "Regule seu sono diariamente como nosso APP.",
+                ClassificacaoAplicativo.CLASSIFICACAO_LIVRE,
+                StatusAplicativo.EM_DESENVOLVIMENTO,
+                categoria01,
+                fabricante01
+        );
+        Aplicativo aplicativo02 = new Aplicativo(
+                null,
+                "Sleep Cyce: Gravador de corrida",
+                5.37,
+                "Pode ser utiliziado para gravar os treinos durante uma atividade física",
+                ClassificacaoAplicativo.CLASSIFICACAO_LIVRE,
+                StatusAplicativo.DESCONTINUADO,
+                categoria01,
+                fabricante01
+        );
+
+        Aplicativo aplicativo03 = new Aplicativo(
+                null,
+                "Shopee",
+                2.57,
+                "Compre com promoções",
+                ClassificacaoAplicativo.CLASSIFICACAO_LIVRE,
+                StatusAplicativo.EM_DESENVOLVIMENTO,
+                categoria02,
+                fabricante03
+        );
+
+        aplicativoRepository.saveAll(Arrays.asList(aplicativo01, aplicativo02, aplicativo03));
 
 
     }
