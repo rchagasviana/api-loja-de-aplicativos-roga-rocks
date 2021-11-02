@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.modelmapper.ModelMapper;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -41,7 +42,7 @@ public class AplicativoRespostaDTO implements Serializable {
     private Usuario fabricante;
 
     @JsonProperty
-    private Set<Avaliacao> avaliacoes = new HashSet<>();
+    private List<Avaliacao> avaliacoes;
 
 
     public static AplicativoRespostaDTO converterParaCategoriaDTO(Aplicativo aplicativo) {

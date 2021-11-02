@@ -20,19 +20,19 @@ public class AplicativoController {
 
 
     //LISTAR TODOS OS APLICATIVOS
-  /*  @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<List<AplicativoRespostaDTO>> buscarTodos() {
         List<Aplicativo> listaDeAplicativo = servico.buscarTodos();
         //Converter para o padrão de resposta
         List<AplicativoRespostaDTO> listaAplicativoDTO = AplicativoRespostaDTO.converterParaListaAplicativoDTO(listaDeAplicativo);
         return ResponseEntity.ok().body(listaAplicativoDTO);
-    }*/
+    }
 
     //LISTAR TODOS OS APLICATIVOS
-    @RequestMapping(method = RequestMethod.GET)
+   /* @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<List<Aplicativo>> buscarTodos() {
         List<Aplicativo> listaDeAplicativo = servico.buscarTodos();
         return ResponseEntity.ok().body(listaDeAplicativo);
-    }
+    }*/
 
 }
