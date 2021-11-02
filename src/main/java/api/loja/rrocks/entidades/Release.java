@@ -26,7 +26,7 @@ public class Release implements Serializable {
 
     @Getter
     @Setter
-    @Column(length = 500)
+    @Column(length = 30)
     private String nome;
 
     @Getter

@@ -36,7 +36,7 @@ public class Aplicativo implements Serializable {
 
     @Getter
     @Setter
-    @Column(nullable = false)
+    @Column(nullable = false, length = 30)
     private String nome;
 
     @Getter
@@ -46,7 +46,7 @@ public class Aplicativo implements Serializable {
 
     @Getter
     @Setter
-    @Column(nullable = false)
+    @Column(length = 600, nullable = false)
     private String descricao;
 
 
@@ -77,10 +77,10 @@ public class Aplicativo implements Serializable {
     @Setter
     @OneToMany(mappedBy = "id.aplicativo")
     /*
-    * A implementação com o conjuntos doi modificada porque assim, sempre que um novo comentário
-    * for inserido pelomesmo usuário para o mesmo aplicativo, ele irá sobrescreverá o anterior
-    * (lembrar de ignorar os hashCode, toString e coleções quando for usar conjunto)
-    * */
+     * A implementação com o conjuntos doi modificada porque assim, sempre que um novo comentário
+     * for inserido pelomesmo usuário para o mesmo aplicativo, ele irá sobrescreverá o anterior
+     * (lembrar de ignorar os hashCode, toString e coleções quando for usar conjunto)
+     * */
     //private Set<Avaliacao> avaliacoes = new HashSet<>();
     private List<Avaliacao> avaliacoes = new ArrayList<>();
 
