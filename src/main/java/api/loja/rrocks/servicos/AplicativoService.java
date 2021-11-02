@@ -9,6 +9,7 @@ import api.loja.rrocks.repositorios.AplicativoRepository;
 import api.loja.rrocks.repositorios.CategoriaRepository;
 import api.loja.rrocks.repositorios.ReleaseRepository;
 import api.loja.rrocks.repositorios.UsuarioRepository;
+import api.loja.rrocks.servicos.excecoes.ObjetoNaoEncontradoException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.time.Instant;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AplicativoService {
@@ -34,8 +36,21 @@ public class AplicativoService {
         return repositorio.findAll();
     }
 
+    //BUSCAR APLICATIVO PELO NOM E CATEGORIA (TIPO)
+    public Aplicativo buscarPorNomeTipo(String nome, Categoria categoria) {
+        return repositorio.findByNomeAndCategoria(nome, categoria).orElseThrow(
+                () -> new ObjetoNaoEncontradoException("Aplicativo " + nome + " e categoria " + categoria.getId() + "(" + categoria.getNome() + ")" + " não encontrado!!")
+        );
+    }
+
+    //BUSCAR APLICATIVO POR NOME
+    public Aplicativo buscarPorNome(String nome) {
+        return repositorio.findByNome(nome).orElseThrow(
+                () -> new ObjetoNaoEncontradoException("Aplicativo " + nome + " não encontrado!!"));
+    }
+
     /*
-     * Monta o objeto para ser persistido na entidade Aplicativo
+     * Monta o objeto para ser persistido
      * */
     public Aplicativo fromDTOSalvar(AplicativoSalvarDTO aplicativoSalvarDTO) {
         Categoria categoria = new Categoria();

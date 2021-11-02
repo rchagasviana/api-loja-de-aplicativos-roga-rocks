@@ -11,10 +11,7 @@ import api.loja.rrocks.repositorios.CategoriaRepository;
 import api.loja.rrocks.servicos.AplicativoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
@@ -29,8 +26,6 @@ public class AplicativoController {
     private AplicativoService servico;
 
 
-
-
     //LISTAR TODOS OS APLICATIVOS
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<List<AplicativoRespostaDTO>> buscarTodos() {
@@ -40,12 +35,21 @@ public class AplicativoController {
         return ResponseEntity.ok().body(listaAplicativoDTO);
     }
 
-    //LISTAR TODOS OS APLICATIVOS
-   /* @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<List<Aplicativo>> buscarTodos() {
-        List<Aplicativo> listaDeAplicativo = servico.buscarTodos();
-        return ResponseEntity.ok().body(listaDeAplicativo);
-    }*/
+    //BUSCAR POR NOME
+    @RequestMapping(value = "/{nome}", method = RequestMethod.GET)
+    public ResponseEntity<?> buscarPorNome(@PathVariable String nome) {
+        Aplicativo listaDeAplicativos = servico.buscarPorNome(nome);
+        return ResponseEntity.ok().body(listaDeAplicativos);
+    }
+
+
+    //BUSCAR APLICATIVO POR NOME E TIPO (categoria)
+    @RequestMapping(value = "/{nome}/{categoria}", method = RequestMethod.GET)
+    public ResponseEntity<Aplicativo> buscarPorNomeTipo(@PathVariable String nome, @PathVariable Categoria categoria) {
+        Aplicativo listaDeAplicativos = servico.buscarPorNomeTipo(nome, categoria);
+        return ResponseEntity.ok().body(listaDeAplicativos);
+    }
+
 
     //SALVAR UMA NOVA CIDADE
     @RequestMapping(method = RequestMethod.POST)
