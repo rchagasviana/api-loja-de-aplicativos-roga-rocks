@@ -3,25 +3,28 @@ package api.loja.rrocks.entidades;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import java.io.Serializable;
 
-@NoArgsConstructor
 @EqualsAndHashCode
 @Embeddable
 public class AvaliacaoPK implements Serializable {
+	private static final long serialVersionUID = 7688595492118877882L;
+
+	@Getter
+    @Setter
+    @ManyToOne
+    @JoinColumn(name = "aplicativo_id")
+    private Aplicativo aplicativo;
 
     @Getter
     @Setter
-    @Column(name = "aplicativo_id")
-    private Long IdAplicativo;
+    @ManyToOne
+    @JoinColumn(name = "consumidor_id")
+    private Usuario consumidor;
 
-    @Getter
-    @Setter
-    @Column(name = "consumidor_id")
-    private Long IdConsumidor;
+
 }

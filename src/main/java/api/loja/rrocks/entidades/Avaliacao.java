@@ -4,7 +4,6 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -13,37 +12,35 @@ import java.io.Serializable;
 @Entity
 @Table(name = "tb_avaliacao")
 public class Avaliacao implements Serializable {
+	private static final long serialVersionUID = -6995701512149967584L;
 
-    //ATRIBUTOS BÁSICOS
+	//ATRIBUTOS BÁSICOS
     @Getter
     @Setter
     @EmbeddedId
-    private AvaliacaoPK id;
-
-    @Getter
-    @Setter
-    @ManyToOne
-    @MapsId("IdAplicativo")
-    @JoinColumn(name = "aplicativo_id")
-    private Aplicativo aplicativo;
-
-    @Getter
-    @Setter
-    @ManyToOne
-    @MapsId("IdConsumidor")
-    @JoinColumn(name = "consumidor_id")
-    private Consumidor consumidor;
+    private AvaliacaoPK id = new AvaliacaoPK();
 
     //ATRIBUTOS DO RELACIONAMENTO
     @Getter
     @Setter
+    @Column(length = 500)
     private String comentario;
 
 
+    public Avaliacao(Aplicativo aplicativo, Usuario consumidor, String comentario) {
+        this.id = id;
+        id.setAplicativo(aplicativo);
+        id.setConsumidor(consumidor);
+        this.comentario = comentario;
+    }
 
+    public Aplicativo getAplicativo() {
+        return id.getAplicativo();
+    }
 
-
-
+    public Usuario getUsuario() {
+        return id.getConsumidor();
+    }
 
 
 }

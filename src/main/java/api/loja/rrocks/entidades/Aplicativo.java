@@ -45,8 +45,7 @@ public class Aplicativo implements Serializable {
     @Column(nullable = false)
     private String descricao;
 
-    @Getter
-    @Setter
+   
     @Column(nullable = false)
     private Integer statusAplicativo;
 
@@ -71,8 +70,9 @@ public class Aplicativo implements Serializable {
     private List<Release> releases = new ArrayList<>();
 
     @Getter
-    @OneToMany(mappedBy = "aplicativo")
-    private List<Avaliacao> avaliacoes = new ArrayList<>();
+    @Setter
+    @OneToMany(mappedBy = "id.aplicativo")
+    private Set<Avaliacao> avaliacoes = new HashSet<>();
 
 
     public Aplicativo(Long id,
@@ -108,4 +108,6 @@ public class Aplicativo implements Serializable {
     public void setClassificacao(ClassificacaoAplicativo classificacao) {
         this.classificacao = classificacao.getCodigo();
     }
+
+
 }

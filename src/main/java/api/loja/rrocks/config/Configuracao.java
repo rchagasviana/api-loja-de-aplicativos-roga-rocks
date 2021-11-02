@@ -35,6 +35,9 @@ public class Configuracao implements CommandLineRunner {
     private AplicativoRepository aplicativoRepository;
     @Autowired
     private ReleaseRepository releaseRepository;
+    @Autowired
+    private AvaliacaoRepository avaliacaoRepository;
+
 
     @Override
     public void run(String... args) throws Exception {
@@ -180,7 +183,7 @@ public class Configuracao implements CommandLineRunner {
         );
         Aplicativo aplicativo02 = new Aplicativo(
                 null, "Sleep Cyce: Gravador de corrida",
-                120.00, "Pode ser utiliziado para gravar os treinos durante uma atividade física",
+                120.00, "Pode ser utilizado para gravar os treinos durante uma atividade física",
                 ClassificacaoAplicativo.CLASSIFICACAO_LIVRE, StatusAplicativo.DESCONTINUADO,
                 categoria01, fabricante01
         );
@@ -233,6 +236,22 @@ public class Configuracao implements CommandLineRunner {
                 "Correção de erros no alerta sonoro e desbloqueio facial", aplicativo01);
 
         releaseRepository.saveAll(Arrays.asList(release01, release02, release03, release04, release05, release06));
+
+        //POPULANDO COMENTÁRIO
+        Avaliacao avaliacao01 = new Avaliacao(
+                aplicativo01, consumidor01,
+                "A usabilidade desta versão é bem ruim");
+        avaliacaoRepository.saveAll(Arrays.asList(avaliacao01));
+
+        Avaliacao avaliacao02 = new Avaliacao(
+                aplicativo01, consumidor02,
+                "Poderia ter outros efeitos sonoros");
+        avaliacaoRepository.saveAll(Arrays.asList(avaliacao01, avaliacao02));
+
+        Avaliacao avaliacao03 = new Avaliacao(
+                aplicativo02, consumidor01,
+                "Seria interessante lançarem uma nova versão. Por que desistiram de continuarem desenvolvendo? ");
+        avaliacaoRepository.saveAll(Arrays.asList(avaliacao01, avaliacao02, avaliacao03));
 
     }
 }
