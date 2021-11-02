@@ -15,17 +15,17 @@ import java.util.Optional;
 @Repository
 public interface AplicativoRepository extends JpaRepository<Aplicativo, Long> {
 
-
-   /* @Modifying
-    @Query("SELECT a.id , a.nome, a.preco, a.categoria FROM Aplicativo a WHERE a.nome =: nome AND a.categoria = :categoria")
-    @Transactional
-    List<Aplicativo> buscarPorNomeCategoria(
-            @Param(value = "nome") String nome,
-            @Param(value = "categoria") Long categoria
-    );*/
+    Optional<Aplicativo> findByNome(String nome);
 
     Optional<Aplicativo> findByNomeAndCategoria(String nome, Categoria categoria);
-    Optional<Aplicativo> findByNome(String nome);
+
+
+    //SELECT a FROM Aplicativo a WHERE a.preco = (SELECT MIN(a.preco) FROM a) -> buscar produto por menor preço
+    //"SELECT a FROM Aplicativo a WHERE a.categoria= :categoria" -> buscar por categoria
+    //SELECT a FROM Aplicativo a WHERE a.preco = (SELECT MIN(a.preco) FROM a WHERE a.categoria= :categoria)
+
+    @Query("SELECT a FROM Aplicativo a WHERE a.preco = (SELECT MIN(a.preco) FROM a WHERE a.categoria= :categoria)")
+    Optional<Aplicativo> buscarAplicativoBaratoPorTipo(@Param(value = "categoria") Categoria categoria);
 
 
 }

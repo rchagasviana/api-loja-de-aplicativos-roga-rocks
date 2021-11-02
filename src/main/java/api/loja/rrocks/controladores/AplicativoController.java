@@ -26,22 +26,12 @@ public class AplicativoController {
     private AplicativoService servico;
 
 
-    //LISTAR TODOS OS APLICATIVOS
-    @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<List<AplicativoRespostaDTO>> buscarTodos() {
-        List<Aplicativo> listaDeAplicativo = servico.buscarTodos();
-        //Converter para o padrão de resposta
-        List<AplicativoRespostaDTO> listaAplicativoDTO = AplicativoRespostaDTO.converterParaListaAplicativoDTO(listaDeAplicativo);
-        return ResponseEntity.ok().body(listaAplicativoDTO);
-    }
-
-    //BUSCAR POR NOME
-    @RequestMapping(value = "/{nome}", method = RequestMethod.GET)
-    public ResponseEntity<?> buscarPorNome(@PathVariable String nome) {
-        Aplicativo listaDeAplicativos = servico.buscarPorNome(nome);
+    //RECEBE O ID DA CATEGORIA E RETORNA O PRODUTO MAIS BARATO
+    @RequestMapping(value = "/{categoria}", method = RequestMethod.GET)
+    public ResponseEntity<?> buscarPorTipo(@PathVariable Categoria categoria) {
+        Aplicativo listaDeAplicativos = servico.buscarPorCategoriaPreco(categoria);
         return ResponseEntity.ok().body(listaDeAplicativos);
     }
-
 
     //BUSCAR APLICATIVO POR NOME E TIPO (categoria)
     @RequestMapping(value = "/{nome}/{categoria}", method = RequestMethod.GET)
@@ -51,7 +41,7 @@ public class AplicativoController {
     }
 
 
-    //SALVAR UMA NOVA CIDADE
+    //SALVAR UMA NOVO APLICATIVO
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Aplicativo> salvar(@Valid @RequestBody AplicativoSalvarDTO aplicativoSalvarDTO) {
         /*

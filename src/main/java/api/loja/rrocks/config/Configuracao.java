@@ -207,7 +207,14 @@ public class Configuracao implements CommandLineRunner {
                 ClassificacaoAplicativo.NAO_RECOMENDADA_MENORES_18_ANOS, StatusAplicativo.EM_DESENVOLVIMENTO,
                 categoria07, fabricante09
         );
-        aplicativoRepository.saveAll(Arrays.asList(aplicativo01, aplicativo02, aplicativo03, aplicativo04, aplicativo05));
+        Aplicativo aplicativo06 = new Aplicativo(
+                null, "Monitoramento de Passos",
+                8.99, "Monitore seus passoa diários ",
+                ClassificacaoAplicativo.NAO_RECOMENDADA_MENORES_10_ANOS, StatusAplicativo.EM_DESENVOLVIMENTO,
+                categoria01, fabricante03
+        );
+
+        aplicativoRepository.saveAll(Arrays.asList(aplicativo01, aplicativo02, aplicativo03, aplicativo04, aplicativo05, aplicativo06));
 
         //POPULANDO RELEASES
         Release release01 = new Release(

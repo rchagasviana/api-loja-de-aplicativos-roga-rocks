@@ -31,22 +31,22 @@ public class AplicativoService {
     @Autowired
     private ReleaseRepository releaseRepository;
 
-    //BUSCAR TODOS O APLICATIVOS
-    public List<Aplicativo> buscarTodos() {
-        return repositorio.findAll();
+
+    //RECEBE O ID DA CATEGORIA E RETORNA O PRODUTO MAIS BARATO
+    public Aplicativo buscarPorCategoriaPreco(Categoria categoria) {
+        Optional<Aplicativo> aplicativo = repositorio.buscarAplicativoBaratoPorTipo(categoria);
+        System.out.println("TIPO DE CLASSE : " + aplicativo.getClass());
+
+        return aplicativo.orElseThrow(
+                () -> new ObjetoNaoEncontradoException("Aplicativo de categoria  " + categoria.getId() + "(" + categoria.getNome() + ")" + " não encontrado!!")
+        );
     }
 
-    //BUSCAR APLICATIVO PELO NOM E CATEGORIA (TIPO)
+    //BUSCAR APLICATIVO PELO NOME E CATEGORIA (TIPO)
     public Aplicativo buscarPorNomeTipo(String nome, Categoria categoria) {
         return repositorio.findByNomeAndCategoria(nome, categoria).orElseThrow(
                 () -> new ObjetoNaoEncontradoException("Aplicativo " + nome + " e categoria " + categoria.getId() + "(" + categoria.getNome() + ")" + " não encontrado!!")
         );
-    }
-
-    //BUSCAR APLICATIVO POR NOME
-    public Aplicativo buscarPorNome(String nome) {
-        return repositorio.findByNome(nome).orElseThrow(
-                () -> new ObjetoNaoEncontradoException("Aplicativo " + nome + " não encontrado!!"));
     }
 
     /*
