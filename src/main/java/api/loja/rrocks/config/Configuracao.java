@@ -33,6 +33,8 @@ public class Configuracao implements CommandLineRunner {
     private ContatoRepository contatoRepository;
     @Autowired
     private AplicativoRepository aplicativoRepository;
+    @Autowired
+    private ReleaseRepository releaseRepository;
 
     @Override
     public void run(String... args) throws Exception {
@@ -145,13 +147,13 @@ public class Configuracao implements CommandLineRunner {
         Endereco endereco15 = new Endereco(null, "Acesso Cinco B", "SN", "Próximo ao Batalhão PM-MA", "Sarandi", "91120-024", cidade02, consumidor03);
         Endereco endereco16 = new Endereco(null, "Rua Nova Petrópolis", "SN", "Próximo ao Hospital da Cidade", "Cascata", "91710-500", cidade03, consumidor04);
         Endereco endereco17 = new Endereco(null, "Rua Miraguaí", "SN", "Próximo ao Centro Industrial", "Lomba do Pinheiro", "91550-826", cidade03, consumidor05);
-        Endereco endereco18 = new Endereco(null, "Rua João Cláudio Ribeiro da Roza", "SN", "Próximo ao Centro Industrial", "Lami", "91787-667", cidade03, consumidor06);
-        Endereco endereco19 = new Endereco(null, "Travessa Dois", "SN", "Próximo ao Centro Industrial", "Novo Angelim", "65060-474", cidade03, consumidor07);
-        Endereco endereco20 = new Endereco(null, "Travessa Nove", "SN", "Próximo ao Centro Industrial", "Chácara Itapiracó", "65054-890", cidade03, consumidor08);
-        Endereco endereco21 = new Endereco(null, "Fonte das Pedras", "SN", "Próximo ao Centro Industrial", "Centro", "65015-400", cidade03, consumidor09);
-        Endereco endereco22 = new Endereco(null, "Rua Quarenta e Nove", "SN", "Próximo ao Centro Industrial", "Vinhais", "65071-260", cidade03, consumidor10);
-        Endereco endereco23 = new Endereco(null, "Rua Frei Sampaio", "SN", "Próximo ao Centro Industrial", "Lira", "65025-430", cidade03, consumidor11);
-        Endereco endereco24 = new Endereco(null, "Rua dos Timbós", "SN", "Próximo ao Centro Industrial", "Jardim Renascença", "65075-410", cidade03, consumidor02);
+        Endereco endereco18 = new Endereco(null, "Rua João Cláudio Ribeiro da Roza", "SN", "Próximo ao Centro Industrial", "Lami", "91787-667", cidade04, consumidor06);
+        Endereco endereco19 = new Endereco(null, "Travessa Dois", "SN", "Próximo ao Centro Industrial", "Novo Angelim", "65060-474", cidade05, consumidor07);
+        Endereco endereco20 = new Endereco(null, "Travessa Nove", "SN", "Próximo ao Centro Industrial", "Chácara Itapiracó", "65054-890", cidade06, consumidor08);
+        Endereco endereco21 = new Endereco(null, "Fonte das Pedras", "SN", "Próximo ao Centro Industrial", "Centro", "65015-400", cidade06, consumidor09);
+        Endereco endereco22 = new Endereco(null, "Rua Quarenta e Nove", "SN", "Próximo ao Centro Industrial", "Vinhais", "65071-260", cidade07, consumidor10);
+        Endereco endereco23 = new Endereco(null, "Rua Frei Sampaio", "SN", "Próximo ao Centro Industrial", "Lira", "65025-430", cidade08, consumidor11);
+        Endereco endereco24 = new Endereco(null, "Rua dos Timbós", "SN", "Próximo ao Centro Industrial", "Jardim Renascença", "65075-410", cidade01, consumidor02);
         enderecoRepository.saveAll(Arrays.asList(endereco13, endereco14, endereco15, endereco16, endereco17, endereco18, endereco19, endereco20, endereco21, endereco22, endereco23, endereco24));
 
         //POPULANDO CONTATOS PARA USUÁRIOS-CONSUMIDORES
@@ -171,39 +173,66 @@ public class Configuracao implements CommandLineRunner {
 
         //POPULANDO APLICATIVO
         Aplicativo aplicativo01 = new Aplicativo(
-                null,
-                "Sleep Cyce: Gravador de sono",
-                12.25,
-                "Regule seu sono diariamente como nosso APP.",
-                ClassificacaoAplicativo.CLASSIFICACAO_LIVRE,
-                StatusAplicativo.EM_DESENVOLVIMENTO,
-                categoria01,
-                fabricante01
+                null, "Sleep Cyce: Gravador de sono",
+                250.25, "Regule seu sono diariamente como nosso APP.",
+                ClassificacaoAplicativo.NAO_RECOMENDADA_MENORES_16_ANOS, StatusAplicativo.EM_DESENVOLVIMENTO,
+                categoria01, fabricante01
         );
         Aplicativo aplicativo02 = new Aplicativo(
-                null,
-                "Sleep Cyce: Gravador de corrida",
-                5.37,
-                "Pode ser utiliziado para gravar os treinos durante uma atividade física",
-                ClassificacaoAplicativo.CLASSIFICACAO_LIVRE,
-                StatusAplicativo.DESCONTINUADO,
-                categoria01,
-                fabricante01
+                null, "Sleep Cyce: Gravador de corrida",
+                120.00, "Pode ser utiliziado para gravar os treinos durante uma atividade física",
+                ClassificacaoAplicativo.CLASSIFICACAO_LIVRE, StatusAplicativo.DESCONTINUADO,
+                categoria01, fabricante01
         );
-
         Aplicativo aplicativo03 = new Aplicativo(
-                null,
-                "Shopee",
-                2.57,
-                "Compre com promoções",
-                ClassificacaoAplicativo.CLASSIFICACAO_LIVRE,
-                StatusAplicativo.EM_DESENVOLVIMENTO,
-                categoria02,
-                fabricante03
+                null, "Shopee",
+                52.07, "Compre com promoções",
+                ClassificacaoAplicativo.CLASSIFICACAO_LIVRE, StatusAplicativo.EM_DESENVOLVIMENTO,
+                categoria02, fabricante03
         );
 
-        aplicativoRepository.saveAll(Arrays.asList(aplicativo01, aplicativo02, aplicativo03));
+        Aplicativo aplicativo04 = new Aplicativo(
+                null, "Skype",
+                4.99, "Converse com amigos e familiares usando voz, áudio e vídeo",
+                ClassificacaoAplicativo.NAO_RECOMENDADA_MENORES_14_ANOS, StatusAplicativo.EM_DESENVOLVIMENTO,
+                categoria03, fabricante05
+        );
 
+        Aplicativo aplicativo05 = new Aplicativo(
+                null, "Lembrete de Contas PRO",
+                10.99, "Pague suas contas sem em dia e fuja dos juros",
+                ClassificacaoAplicativo.NAO_RECOMENDADA_MENORES_18_ANOS, StatusAplicativo.EM_DESENVOLVIMENTO,
+                categoria07, fabricante09
+        );
+        aplicativoRepository.saveAll(Arrays.asList(aplicativo01, aplicativo02, aplicativo03, aplicativo04, aplicativo05));
+
+        //POPULANDO RELEASES
+        Release release01 = new Release(
+                null, "1.0.1",
+                Instant.parse("2020-07-01T00:00:00Z"), Instant.parse("2021-11-01T00:00:00Z"),
+                "Versão de lançamento", aplicativo01);
+        Release release02 = new Release(
+                null, "3.4.1",
+                Instant.parse("2021-06-11T00:00:00Z"), null,
+                "Versão de Relançamento", aplicativo02);
+        Release release03 = new Release(
+                null, "6.2.1",
+                Instant.parse("2021-09-13T00:00:00Z"), null,
+                "Dupla forma de pagamento já inclusa", aplicativo03);
+        Release release04 = new Release(
+                null, "5.3.1",
+                Instant.parse("2020-09-03T00:00:00Z"), null,
+                "Videochamada", aplicativo04);
+        Release release05 = new Release(
+                null, "3.0.1",
+                Instant.parse("2020-06-02T00:00:00Z"), null,
+                "Alerta sonoro para contas a vencer", aplicativo05);
+        Release release06 = new Release(
+                null, "1.9.8",
+                Instant.parse("2021-11-01T00:00:00Z"), null,
+                "Correção de erros no alerta sonoro e desbloqueio facial", aplicativo01);
+
+        releaseRepository.saveAll(Arrays.asList(release01, release02, release03, release04, release05, release06));
 
     }
 }

@@ -26,6 +26,11 @@ public class Release implements Serializable {
 
     @Getter
     @Setter
+    @Column(length = 500)
+    private String nome;
+
+    @Getter
+    @Setter
     @Column(nullable = false)
     private Instant dataLancamento;
 
@@ -46,5 +51,15 @@ public class Release implements Serializable {
     @ManyToOne
     @JoinColumn(name = "aplicativo_id")
     private Aplicativo aplicativo;
+
+
+    public Release(Long id, String nome, Instant dataLancamento, Instant dataTermino, String descricao, Aplicativo aplicativo) {
+        this.id = id;
+        this.nome = nome;
+        this.dataLancamento = dataLancamento;
+        this.dataTermino = dataTermino;
+        this.descricao = descricao;
+        this.aplicativo = aplicativo;
+    }
 
 }
