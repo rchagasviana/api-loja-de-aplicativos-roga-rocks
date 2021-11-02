@@ -36,7 +36,7 @@ public class Aplicativo implements Serializable {
 
     @Getter
     @Setter
-    @Column(nullable = false, length = 30)
+    @Column(nullable = false)
     private String nome;
 
     @Getter
@@ -46,7 +46,7 @@ public class Aplicativo implements Serializable {
 
     @Getter
     @Setter
-    @Column(length = 600, nullable = false)
+    @Column(nullable = false)
     private String descricao;
 
 

@@ -26,7 +26,7 @@ public class Release implements Serializable {
 
     @Getter
     @Setter
-    @Column(length = 30)
+    @Column
     private String nome;
 
     @Getter
@@ -41,7 +41,7 @@ public class Release implements Serializable {
 
     @Getter
     @Setter
-    @Column(length = 500)
+    @Column
     private String descricao;
 
     //RELACIONAMENTOS

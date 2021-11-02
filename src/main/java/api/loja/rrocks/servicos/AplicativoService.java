@@ -26,12 +26,12 @@ public class AplicativoService {
     /*
      * Monsta o objeto para ser persistido na entidade Aplicativo
      * */
-    public Aplicativo fromDTOSalvar(AplicativoSalvarDTO aplicativoSalvarDTO) {
+   /* public Aplicativo fromDTOSalvar(AplicativoSalvarDTO aplicativoSalvarDTO) {
         //Estado estado = new Estado();
         //   Aplicativo aplicativo = new Aplicativo();
         System.out.println(aplicativoSalvarDTO);
         return null;
-    }
+    }*/
 
 
 }

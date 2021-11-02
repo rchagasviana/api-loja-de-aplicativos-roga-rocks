@@ -1,12 +1,9 @@
 package api.loja.rrocks.dto;
 
-import api.loja.rrocks.entidades.Categoria;
-import api.loja.rrocks.entidades.Usuario;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
-
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;

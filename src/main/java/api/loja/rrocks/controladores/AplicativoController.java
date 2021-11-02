@@ -45,7 +45,7 @@ public class AplicativoController {
     }*/
 
     //SALVAR UMA NOVA CIDADE
-    @RequestMapping(method = RequestMethod.POST)
+  /*  @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Aplicativo> salvar(@Valid @RequestBody AplicativoSalvarDTO aplicativoSalvarDTO) {
         /*
          * Conforme a RFC 2616, o código 201 é retornado sempre que um novo valor é inserido, logo
@@ -58,7 +58,7 @@ public class AplicativoController {
          * buildAndExpand() -> captura o id do nodo dado inserido
          * */
 
-        Aplicativo aplicativo = servico.fromDTOSalvar(aplicativoSalvarDTO);
+    /*    Aplicativo aplicativo = servico.fromDTOSalvar(aplicativoSalvarDTO);
 
       //  servico.salvar(aplicativo);
         URI uriBuscaNovoDadoInserido = ServletUriComponentsBuilder
@@ -67,6 +67,6 @@ public class AplicativoController {
                 .buildAndExpand(aplicativo.getId()).toUri();
         return ResponseEntity.created(uriBuscaNovoDadoInserido).build();
 
-    }
+    }*/
 
 }
