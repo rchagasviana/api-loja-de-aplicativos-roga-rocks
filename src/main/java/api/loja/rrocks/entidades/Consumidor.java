@@ -10,7 +10,9 @@ import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 
@@ -39,9 +41,14 @@ public class Consumidor extends Usuario {
     @Getter
     @Setter
     @OneToMany(mappedBy = "id.consumidor")//obs: A referência é pra Classe Id da Classe Avaliação que contém o mapeamento das chaves compostas
-    //Cada consumidor só poderá fazer um comentário e após isso somente reavaliar.
-    // Dessa forma a valiação fica mais fidedigna, uma vez que cada app sofrerá atualizações com o tempo
-    private Set<Avaliacao> avaliacoes = new HashSet<>();
+    /*
+     * A implementação com o conjuntos doi modificada porque assim, sempre que um novo comentário
+     * for inserido pelomesmo usuário para o mesmo aplicativo, ele irá sobrescreverá o anterior
+     * (lembrar de ignorar os hashCode, toString e coleções  quando for usar conjunto)
+     * */
+    //private Set<Avaliacao> avaliacoes = new HashSet<>();
+    private List<Avaliacao> avaliacoes = new ArrayList<>();
+
 
     public Consumidor(Long id, String nome, Instant dataNascimento, Sexo sexo, String profissao) {
         super(id, nome);

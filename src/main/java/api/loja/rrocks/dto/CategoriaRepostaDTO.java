@@ -30,7 +30,6 @@ public class CategoriaRepostaDTO implements Serializable {
     @JsonProperty
     private Long id;
 
-
     @JsonProperty
     private String nome;
 

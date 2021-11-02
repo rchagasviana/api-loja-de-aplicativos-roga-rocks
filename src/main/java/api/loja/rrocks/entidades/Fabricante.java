@@ -1,6 +1,7 @@
 package api.loja.rrocks.entidades;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -32,6 +33,7 @@ public class Fabricante extends Usuario {
     private String cnpj;
 
     //RELACIONAMENTOS
+    @JsonIgnore
     @OneToMany(mappedBy = "fabricante")
     private List<Aplicativo> aplicativos = new ArrayList<>();
 

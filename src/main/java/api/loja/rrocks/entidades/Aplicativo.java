@@ -3,6 +3,10 @@ package api.loja.rrocks.entidades;
 
 import api.loja.rrocks.entidades.enums.ClassificacaoAplicativo;
 import api.loja.rrocks.entidades.enums.StatusAplicativo;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -45,7 +49,7 @@ public class Aplicativo implements Serializable {
     @Column(nullable = false)
     private String descricao;
 
-   
+
     @Column(nullable = false)
     private Integer statusAplicativo;
 
@@ -72,7 +76,13 @@ public class Aplicativo implements Serializable {
     @Getter
     @Setter
     @OneToMany(mappedBy = "id.aplicativo")
-    private Set<Avaliacao> avaliacoes = new HashSet<>();
+    /*
+    * A implementação com o conjuntos doi modificada porque assim, sempre que um novo comentário
+    * for inserido pelomesmo usuário para o mesmo aplicativo, ele irá sobrescreverá o anterior
+    * (lembrar de ignorar os hashCode, toString e coleções quando for usar conjunto)
+    * */
+    //private Set<Avaliacao> avaliacoes = new HashSet<>();
+    private List<Avaliacao> avaliacoes = new ArrayList<>();
 
 
     public Aplicativo(Long id,

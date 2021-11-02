@@ -1,5 +1,6 @@
 package api.loja.rrocks.entidades;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -30,6 +31,7 @@ public abstract class Usuario implements Serializable {
     private String nome;
 
     //RELACIONAMENTOS
+    @JsonIgnore
     @Getter
     @OneToMany(mappedBy = "usuario")
     private List<Endereco> enderecos = new ArrayList<>();
@@ -40,6 +42,7 @@ public abstract class Usuario implements Serializable {
      * Isso porque, nesta regra de negócio, não faz sentido existir um registro de ContatoRepository sem um Usuário associado
      *
      *  */
+    @JsonIgnore
     @Getter
     @Setter
     @OneToOne(cascade = CascadeType.ALL) //neste caso não se usa mappedBy = "usuario"

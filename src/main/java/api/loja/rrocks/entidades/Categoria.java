@@ -1,5 +1,6 @@
 package api.loja.rrocks.entidades;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -37,7 +38,7 @@ public class Categoria implements Serializable {
     private Instant dataDeCriacao;
 
     //RELACIONAMENTOS
-
+    @JsonIgnore
     @Getter
     @OneToMany(mappedBy = "categoria")
     private List<Aplicativo> aplicativos = new ArrayList<>();

@@ -1,9 +1,12 @@
 package api.loja.rrocks.entidades;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -12,9 +15,10 @@ import java.io.Serializable;
 @Entity
 @Table(name = "tb_avaliacao")
 public class Avaliacao implements Serializable {
-	private static final long serialVersionUID = -6995701512149967584L;
+    private static final long serialVersionUID = -6995701512149967584L;
 
-	//ATRIBUTOS BÁSICOS
+    //ATRIBUTOS BÁSICOS
+    @JsonIgnore
     @Getter
     @Setter
     @EmbeddedId
@@ -34,10 +38,13 @@ public class Avaliacao implements Serializable {
         this.comentario = comentario;
     }
 
+
+    @JsonIgnore
     public Aplicativo getAplicativo() {
         return id.getAplicativo();
     }
 
+    @JsonIgnore
     public Usuario getUsuario() {
         return id.getConsumidor();
     }
