@@ -40,10 +40,10 @@ public class AplicativoSalvarDTO implements Serializable {
 
     //DADOS DAS ENTIDADES RELACIONADAS AO APLICATIVO
     @NotNull(message = "O aplicativo precisa pertencer a uma categoria")
-    private Integer categoria;
+    private Long idCategoria;
 
     @NotNull(message = "O fabricante do aplicativo é obrigatório para medidas legais caso necessário.")
-    private Integer fabricante;
+    private Long idFabricante;
 
     //OBRIGATORIAMENTE UMA RELEASE DEVE SER INFORMADA PARA UM APP INSERIDO
     /*
@@ -52,7 +52,7 @@ public class AplicativoSalvarDTO implements Serializable {
      * no sistema e desativação do app.
      * */
     @NotNull(message = "Uma classificação indicativa é obrigatória para sua aplicação.")
-    private Integer idRelease;
+    private Long idRelease;
 
     @NotEmpty(message = "Informa um nome para sua release")
     @Length(min = 1, max = 30, message = "O nome da Release precisa ter entre 4 e 30 caracteres.")

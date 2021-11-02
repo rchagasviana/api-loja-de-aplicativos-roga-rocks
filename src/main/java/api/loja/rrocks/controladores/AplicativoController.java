@@ -7,6 +7,7 @@ import api.loja.rrocks.dto.CidadeSalvarDTO;
 import api.loja.rrocks.entidades.Aplicativo;
 import api.loja.rrocks.entidades.Categoria;
 import api.loja.rrocks.entidades.Cidade;
+import api.loja.rrocks.repositorios.CategoriaRepository;
 import api.loja.rrocks.servicos.AplicativoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -28,6 +29,8 @@ public class AplicativoController {
     private AplicativoService servico;
 
 
+
+
     //LISTAR TODOS OS APLICATIVOS
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<List<AplicativoRespostaDTO>> buscarTodos() {
@@ -45,7 +48,7 @@ public class AplicativoController {
     }*/
 
     //SALVAR UMA NOVA CIDADE
-  /*  @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Aplicativo> salvar(@Valid @RequestBody AplicativoSalvarDTO aplicativoSalvarDTO) {
         /*
          * Conforme a RFC 2616, o código 201 é retornado sempre que um novo valor é inserido, logo
@@ -58,15 +61,15 @@ public class AplicativoController {
          * buildAndExpand() -> captura o id do nodo dado inserido
          * */
 
-    /*    Aplicativo aplicativo = servico.fromDTOSalvar(aplicativoSalvarDTO);
+        Aplicativo aplicativo = servico.fromDTOSalvar(aplicativoSalvarDTO);
 
-      //  servico.salvar(aplicativo);
+        servico.salvar(aplicativo);
         URI uriBuscaNovoDadoInserido = ServletUriComponentsBuilder
                 .fromCurrentRequestUri()
                 .path("/{id}")
                 .buildAndExpand(aplicativo.getId()).toUri();
         return ResponseEntity.created(uriBuscaNovoDadoInserido).build();
 
-    }*/
+    }
 
 }
