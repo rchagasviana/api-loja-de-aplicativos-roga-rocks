@@ -33,6 +33,7 @@ public class AplicativoController {
         return ResponseEntity.ok().body(listaDeAplicativos);
     }
 
+
     //BUSCAR APLICATIVO POR NOME E TIPO (categoria)
     @RequestMapping(value = "/{nome}/{categoria}", method = RequestMethod.GET)
     public ResponseEntity<Aplicativo> buscarPorNomeTipo(@PathVariable String nome, @PathVariable Categoria categoria) {
