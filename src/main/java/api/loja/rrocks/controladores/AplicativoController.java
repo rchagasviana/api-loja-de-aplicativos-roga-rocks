@@ -7,6 +7,8 @@ import api.loja.rrocks.entidades.Aplicativo;
 import api.loja.rrocks.entidades.Categoria;
 import api.loja.rrocks.servicos.AplicativoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.CacheManager;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,6 +24,12 @@ public class AplicativoController {
 
     @Autowired
     private AplicativoService servico;
+
+    /*
+    *Utilizado pra limpar todos os cache de uma só vez e não apenas baseado em uma única chave
+    * Gerenciador de Cache.
+    *
+    * */
 
     //LISTAR TODOS OS APLICATIVOS
     @Cacheable(value = "buscarTodosAplicativos")
@@ -53,6 +61,7 @@ public class AplicativoController {
 
 
     //SALVAR UM NOVO APLICATIVO
+    @CacheEvict(value = "buscarTodosAplicativos", allEntries = true)
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Aplicativo> salvar(@Valid @RequestBody AplicativoSalvarDTO aplicativoSalvarDTO) {
         /*
