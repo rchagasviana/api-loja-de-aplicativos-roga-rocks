@@ -15,7 +15,7 @@
 	<name>api-loja-de-aplicativos-roga-rocks</name>
 	<description>Desenvolvido por Rafael Chagas Viana</description>
 	<properties>
-		<java.version>11</java.version>
+		<java.version>8</java.version>
 	</properties>
 	<dependencies>
 		<dependency>
