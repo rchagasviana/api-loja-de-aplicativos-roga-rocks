@@ -6,10 +6,13 @@ import api.loja.rrocks.dto.AplicativoSalvarDTO;
 import api.loja.rrocks.entidades.Aplicativo;
 import api.loja.rrocks.entidades.Categoria;
 import api.loja.rrocks.servicos.AplicativoService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -17,6 +20,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
+
 
 @RestController
 @RequestMapping(value = "/aplicativos")

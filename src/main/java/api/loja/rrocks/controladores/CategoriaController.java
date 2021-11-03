@@ -6,6 +6,7 @@ import api.loja.rrocks.dto.CategoriaRepostaDTO;
 import api.loja.rrocks.entidades.Categoria;
 import api.loja.rrocks.servicos.CategoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -43,6 +44,7 @@ public class CategoriaController {
     }
 
     //SALVAR UMA NOVA CATEGORIA
+    @CacheEvict(value = "buscarTodosCategorias", allEntries = true)
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Categoria> salvar(@Valid @RequestBody CategoriaDTO categoriaDTO) {
         /*

@@ -7,6 +7,7 @@ import api.loja.rrocks.entidades.Estado;
 import api.loja.rrocks.entidades.Estado;
 import api.loja.rrocks.servicos.EstadoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -44,6 +45,7 @@ public class EstadoController {
     }
 
     //SALVAR UMA NOVA CATEGORIA
+    @CacheEvict(value = "buscarTodosEstados", allEntries = true)
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Estado> salvar(@Valid @RequestBody EstadoDTO estadoDTO) {
         /*

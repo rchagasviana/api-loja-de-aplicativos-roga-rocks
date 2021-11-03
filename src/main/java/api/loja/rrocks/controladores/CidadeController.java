@@ -7,6 +7,7 @@ import api.loja.rrocks.dto.CidadeRespostaDTO;
 import api.loja.rrocks.entidades.Cidade;
 import api.loja.rrocks.servicos.CidadeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -44,6 +45,7 @@ public class CidadeController {
     }
 
     //SALVAR UMA NOVA CIDADE
+    @CacheEvict(value = "buscarTodosCidades", allEntries = true)
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Cidade> salvar(@Valid @RequestBody CidadeSalvarDTO cidadeSalvarDTO) {
         /*

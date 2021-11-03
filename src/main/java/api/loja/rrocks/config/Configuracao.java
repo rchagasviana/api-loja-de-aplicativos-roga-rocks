@@ -7,13 +7,22 @@ import api.loja.rrocks.entidades.enums.StatusAplicativo;
 import api.loja.rrocks.repositorios.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
+import org.springframework.data.web.config.EnableSpringDataWebSupport;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
+import springfox.documentation.builders.ApiInfoBuilder;
+import springfox.documentation.builders.RequestHandlerSelectors;
+import springfox.documentation.service.ApiInfo;
+import springfox.documentation.spi.DocumentationType;
+import springfox.documentation.spring.web.plugins.Docket;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import javax.transaction.Transactional;
 import java.time.Instant;
 import java.util.Arrays;
-
 
 @Configuration
 @Profile("test")
@@ -39,8 +48,10 @@ public class Configuracao implements CommandLineRunner {
     private AvaliacaoRepository avaliacaoRepository;
 
 
+
     @Override
     public void run(String... args) throws Exception {
+
 
         //POPULANDO ESTADO
         Estado estado01 = new Estado(null, "Maranhão (MA)");
@@ -261,4 +272,9 @@ public class Configuracao implements CommandLineRunner {
         avaliacaoRepository.saveAll(Arrays.asList(avaliacao01, avaliacao02, avaliacao03));
 
     }
+
+
+
+
+
 }
