@@ -6,6 +6,7 @@ import api.loja.rrocks.dto.CategoriaRepostaDTO;
 import api.loja.rrocks.entidades.Categoria;
 import api.loja.rrocks.servicos.CategoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -22,6 +23,7 @@ public class CategoriaController {
     private CategoriaService servico;
 
     //RECUPERAR TODAS AS CATEGORIAS
+    @Cacheable(value = "buscarTodosCategorias")
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<List<CategoriaRepostaDTO>> buscarTodos() {
         //Recebe a lista do tipo Categoria
@@ -32,6 +34,7 @@ public class CategoriaController {
     }
 
     //RECUPERAR CATEGORIA POR ID
+    @Cacheable(value = "buscarPorIdCategorias")
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<?> buscarPorId(@PathVariable Long id) {
         Categoria categoria = new Categoria();

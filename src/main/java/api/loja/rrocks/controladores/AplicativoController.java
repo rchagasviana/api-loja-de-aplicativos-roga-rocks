@@ -1,15 +1,13 @@
 package api.loja.rrocks.controladores;
 
+
 import api.loja.rrocks.dto.AplicativoRespostaDTO;
 import api.loja.rrocks.dto.AplicativoSalvarDTO;
-import api.loja.rrocks.dto.CategoriaDTO;
-import api.loja.rrocks.dto.CidadeSalvarDTO;
 import api.loja.rrocks.entidades.Aplicativo;
 import api.loja.rrocks.entidades.Categoria;
-import api.loja.rrocks.entidades.Cidade;
-import api.loja.rrocks.repositorios.CategoriaRepository;
 import api.loja.rrocks.servicos.AplicativoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -25,16 +23,28 @@ public class AplicativoController {
     @Autowired
     private AplicativoService servico;
 
+    //LISTAR TODOS OS APLICATIVOS
+    @Cacheable(value = "buscarTodosAplicativos")
+    @RequestMapping(method = RequestMethod.GET)
+    public ResponseEntity<List<AplicativoRespostaDTO>> buscarTodos() {
+        List<Aplicativo> listaDeAplicativo = servico.buscarTodos();
+        //Converter para o padrão de resposta
+        List<AplicativoRespostaDTO> listaAplicativoDTO = AplicativoRespostaDTO.converterParaListaAplicativoDTO(listaDeAplicativo);
+        return ResponseEntity.ok().body(listaAplicativoDTO);
+    }
+
 
     //RECEBE O ID DA CATEGORIA E RETORNA O PRODUTO MAIS BARATO
+    @Cacheable(value = "buscarMaisBaratoPorTipoAplicativos")
     @RequestMapping(value = "/{categoria}", method = RequestMethod.GET)
-    public ResponseEntity<?> buscarPorTipo(@PathVariable Categoria categoria) {
+    public ResponseEntity<?> buscarMaisBaratoPorTipo(@PathVariable Categoria categoria) {
         Aplicativo listaDeAplicativos = servico.buscarPorCategoriaPreco(categoria);
         return ResponseEntity.ok().body(listaDeAplicativos);
     }
 
 
     //BUSCAR APLICATIVO POR NOME E TIPO (categoria)
+    @Cacheable(value = "buscarPorNomeTipoAplicativos")
     @RequestMapping(value = "/{nome}/{categoria}", method = RequestMethod.GET)
     public ResponseEntity<Aplicativo> buscarPorNomeTipo(@PathVariable String nome, @PathVariable Categoria categoria) {
         Aplicativo listaDeAplicativos = servico.buscarPorNomeTipo(nome, categoria);
@@ -42,7 +52,7 @@ public class AplicativoController {
     }
 
 
-    //SALVAR UMA NOVO APLICATIVO
+    //SALVAR UM NOVO APLICATIVO
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Aplicativo> salvar(@Valid @RequestBody AplicativoSalvarDTO aplicativoSalvarDTO) {
         /*

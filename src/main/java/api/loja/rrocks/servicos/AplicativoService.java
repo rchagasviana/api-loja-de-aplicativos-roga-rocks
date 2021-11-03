@@ -31,12 +31,14 @@ public class AplicativoService {
     @Autowired
     private ReleaseRepository releaseRepository;
 
+    //BUSCAR TODOS O APLICATIVOS
+    public List<Aplicativo> buscarTodos() {
+        return repositorio.findAll();
+    }
 
     //RECEBE O ID DA CATEGORIA E RETORNA O PRODUTO MAIS BARATO
     public Aplicativo buscarPorCategoriaPreco(Categoria categoria) {
         Optional<Aplicativo> aplicativo = repositorio.buscarAplicativoBaratoPorTipo(categoria);
-        System.out.println("TIPO DE CLASSE : " + aplicativo.getClass());
-
         return aplicativo.orElseThrow(
                 () -> new ObjetoNaoEncontradoException("Aplicativo de categoria  " + categoria.getId() + "(" + categoria.getNome() + ")" + " não encontrado!!")
         );

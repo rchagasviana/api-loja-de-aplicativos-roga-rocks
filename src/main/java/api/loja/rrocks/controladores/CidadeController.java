@@ -7,6 +7,7 @@ import api.loja.rrocks.dto.CidadeRespostaDTO;
 import api.loja.rrocks.entidades.Cidade;
 import api.loja.rrocks.servicos.CidadeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -23,6 +24,7 @@ public class CidadeController {
     private CidadeService servico;
 
     //RECUPERAR TODOS OS CIDADES
+    @Cacheable(value = "buscarTodosCidades")
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<List<CidadeRespostaDTO>> buscarTodos() {
         //Recebe a lista do tipo Cidade
@@ -33,6 +35,7 @@ public class CidadeController {
     }
 
     //RECUPERAR CIDADE POR ID
+    @Cacheable(value = "buscarPorIdCidades")
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<?> buscarPorId(@PathVariable Long id) {
         Cidade cidade = new Cidade();

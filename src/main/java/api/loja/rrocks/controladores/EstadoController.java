@@ -7,6 +7,7 @@ import api.loja.rrocks.entidades.Estado;
 import api.loja.rrocks.entidades.Estado;
 import api.loja.rrocks.servicos.EstadoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -23,6 +24,7 @@ public class EstadoController {
     private EstadoService servico;
 
     //RECUPERAR TODOS OS ESTADOS
+    @Cacheable(value = "buscarTodosEstados")
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<List<EstadoRespostaDTO>> buscarTodos() {
         //Recebe a lista do tipo Estado
@@ -33,6 +35,7 @@ public class EstadoController {
     }
 
     //RECUPERAR CATEGORIA POR ID
+    @Cacheable(value = "buscarPorIdEstados")
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<?> buscarPorId(@PathVariable Long id) {
         Estado estado = new Estado();
